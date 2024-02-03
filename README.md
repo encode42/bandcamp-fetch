@@ -2,6 +2,17 @@
 
 # bandcamp-fetch
 
+This fork removes Node dependencies to work with Cloudflare Pages. It might work in other environments that provide `fetch` as well.
+
+- `node-cache` has been replaced with a simple in-memory record store.
+- `URL` has been replaced with a barebones implementation.
+- `EOL` has been replaced with `\\n`. Development outside of Linux might not be supported!
+- `node-fetch` has been removed, falling back to the environment's native `fetch` functions.
+
+This fork will likely not be maintained outside of my own interest!
+
+---
+
 Library for scraping Bandcamp content.
 
 Coverage:

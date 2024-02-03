@@ -1,3 +1,4 @@
+import { URL } from '../utils/URL.js';
 import BaseAPI, { BaseAPIParams } from '../common/BaseAPI.js';
 import { URLS } from '../utils/Constants.js';
 import { FetchMethod } from '../utils/Fetcher.js';

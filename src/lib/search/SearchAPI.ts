@@ -1,4 +1,4 @@
-import { URL } from 'url';
+import { URL } from '../utils/URL.js';
 import { ImageFormat } from '../types/Image.js';
 import { URLS } from '../utils/Constants.js';
 import SearchResultsParser from './SearchResultsParser.js';

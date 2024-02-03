@@ -1,8 +1,82 @@
-import NodeCache from 'node-cache';
-
 export enum CacheDataType {
   Page = 'Page',
   Constants = 'Constants'
+}
+
+interface NodeCacheRecord {
+  [key: string]: {
+    ttl: number,
+    added: Date,
+    value: any
+  }
+}
+
+interface NodeCacheOptions {
+  defaultTTL?: number,
+  checkperiod?: number
+}
+
+class NodeCache {
+  private defaultTTL: number;
+  private recordStore: NodeCacheRecord = {};
+
+  constructor(options: NodeCacheOptions = {}) {
+    options.defaultTTL ??= 0;
+    options.checkperiod ??= 600;
+
+    this.defaultTTL = options.defaultTTL;
+
+    setInterval(() => {
+      for (const [ key, value ] of Object.entries(this.recordStore)) {
+        if (value.ttl > 0 && new Date().getTime() - value.added.getTime() > value.ttl / 1000) {
+          this.del(key);
+          return;
+        }
+      }
+    }, options.checkperiod * 1000);
+  }
+
+  public createKey(key: string, ttl?: number) {
+    if (this.recordStore[key]) {
+      return;
+    }
+
+    this.recordStore[key] = {
+      ttl: ttl ?? this.defaultTTL,
+      added: new Date(),
+      value: undefined
+    };
+  }
+
+  public keys() {
+    return Object.keys(this.recordStore);
+  }
+
+  public get(key: string) {
+    const store = this.recordStore[key];
+
+    return store?.value;
+  }
+
+  public set(key: string, value: any, ttl?: number) {
+    this.createKey(key, ttl);
+    this.recordStore[key].value = value;
+  }
+
+  public del(key: string) {
+    delete this.recordStore[key];
+  }
+
+  public flushAll() {
+    for (const key of this.keys()) {
+      delete this.recordStore[key];
+    }
+  }
+
+  public ttl(key: string, ttl: number) {
+    this.createKey(key);
+    this.recordStore[key].ttl = ttl;
+  }
 }
 
 export default class Cache {

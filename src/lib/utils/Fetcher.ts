@@ -1,5 +1,4 @@
-import { URL } from 'url';
-import fetch, { Request, RequestInit } from 'node-fetch';
+import { URL } from './URL.js';
 import Cache, { CacheDataType } from './Cache.js';
 
 export enum FetchMethod {

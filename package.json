@@ -1,7 +1,7 @@
 {
-  "name": "bandcamp-fetch",
+  "name": "@encode42/bandcamp-fetch",
   "version": "1.2.1",
-  "description": "Scrape Bandcamp content",
+  "description": "Scrape Bandcamp content (supports Cloudflare Pages)",
   "scripts": {
     "build": "npm run prepare",
     "build:esm": "npx tsc -p tsconfig-esm.json",
@@ -30,14 +30,14 @@
   "author": "Patrick Kan <patrickkfkan@gmail.com> (https://github.com/patrickkfkan)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/patrickkfkan/bandcamp-fetch.git"
+    "url": "https://github.com/encode42/bandcamp-fetch.git"
   },
   "license": "MIT",
   "directories": {
     "dist": "./dist"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=15"
   },
   "devDependencies": {
     "@types/cookie": "^0.5.3",
@@ -58,9 +58,7 @@
     "cheerio": "^1.0.0-rc.5",
     "cookie": "^0.5.0",
     "eval5": "^1.4.7",
-    "html-entities": "^2.4.0",
-    "node-cache": "^5.1.2",
-    "node-fetch": "^2.6.9"
+    "html-entities": "^2.4.0"
   },
   "keywords": [
     "bandcamp",

@@ -5,7 +5,6 @@ import { URLS } from '../utils/Constants.js';
 import { ParseError, brToNewLine, isAbsoluteUrl, normalizeUrl, stripTags } from '../utils/Parse.js';
 import { ImageFormat } from '../types/Image.js';
 import Album from '../types/Album.js';
-import { EOL } from 'os';
 import Track from '../types/Track.js';
 
 interface ArticleParseOptions {
@@ -159,8 +158,8 @@ export default class ArticleParser {
       const paragraphs = player.nextUntil('bamplayer-art, h3, h5, article-end', 'p');
       paragraphs.each((i: number, p: any) => {
         p = $(p);
-        section.html += (section.html !== '' ? EOL : '') + p.html();
-        section.text += (section.text !== '' ? EOL + EOL : '') + p.text();
+        section.html += (section.html !== '' ? '\\n' : '') + p.html();
+        section.text += (section.text !== '' ? '\\n' + '\\n' : '') + p.text();
       });
 
       // Get mediaItemRef
@@ -183,8 +182,8 @@ export default class ArticleParser {
         };
         paragraphs.each((i: number, p: any) => {
           p = $(p);
-          section.html += (section.html !== '' ? EOL : '') + p.html();
-          section.text += (section.text !== '' ? EOL + EOL : '') + p.text();
+          section.html += (section.html !== '' ? '\\n' : '') + p.html();
+          section.text += (section.text !== '' ? '\\n' + '\\n' : '') + p.text();
         });
         return section;
       }

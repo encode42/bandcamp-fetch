@@ -57,7 +57,7 @@ export default class AlbumInfoParser {
       url: basic['@id'],
       numTracks: basic.numTracks,
       keywords: basic.keywords,
-      description: basic.description || '',
+      description: basic.description.replaceAll('\r\n', '\n') || '',
       releaseDate: extra.album_release_date,
       artist,
       releases: [],

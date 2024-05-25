@@ -3,6 +3,7 @@ import MediaKind from './MediaKind.js';
 
 interface Track extends MediaKind {
   type: 'track';
+  description?: string;
   duration?: number;
   seekPosition?: number;
   streamUrl?: string;

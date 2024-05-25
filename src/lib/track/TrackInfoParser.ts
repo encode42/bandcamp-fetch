@@ -63,6 +63,7 @@ export default class TrackInfoParser {
     const track: Track = {
       type: 'track',
       name: basic.name,
+      description: basic.description.replaceAll('\r\n', '\n') || '',
       url: basic['@id']
     };
 

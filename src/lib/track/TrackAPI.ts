@@ -4,24 +4,34 @@ import Track from '../types/Track.js';
 import Limiter from '../utils/Limiter.js';
 import TrackInfoParser from './TrackInfoParser.js';
 
-export interface TrackAPIGetInfoParams {
-  trackUrl: string;
+interface GetInfoBase {
   albumImageFormat?: string | number | ImageFormat;
   artistImageFormat?: string | number | ImageFormat;
   includeRawData?: boolean;
 }
 
+interface GetInfoTrackUrl extends GetInfoBase {
+  trackUrl: string;
+}
+
+interface GetInfoUrl extends GetInfoBase {
+  url: string;
+}
+
+export type TrackAPIGetInfoParams = GetInfoTrackUrl | GetInfoUrl;
+
 export default class TrackAPI extends BaseAPIWithImageSupport {
   async getInfo(params: TrackAPIGetInfoParams): Promise<Track> {
     const imageConstants = await this.imageAPI.getConstants();
+    const trackUrl = 'trackUrl' in params ? params.trackUrl : params.url;
     const opts = {
-      trackUrl: params.trackUrl,
+      trackUrl,
       imageBaseUrl: imageConstants.baseUrl,
       albumImageFormat: await this.imageAPI.getFormat(params.albumImageFormat, 9),
       artistImageFormat: await this.imageAPI.getFormat(params.artistImageFormat, 21),
       includeRawData: params.includeRawData !== undefined ? params.includeRawData : false
     };
-    const html = await this.fetch(params.trackUrl);
+    const html = await this.fetch(trackUrl);
     return TrackInfoParser.parseInfo(html, opts);
   }
 }

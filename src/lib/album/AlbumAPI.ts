@@ -4,12 +4,21 @@ import AlbumInfoParser from './AlbumInfoParser.js';
 import Limiter from '../utils/Limiter.js';
 import BaseAPIWithImageSupport, { BaseAPIWithImageSupportParams } from '../common/BaseAPIWithImageSupport.js';
 
-export interface AlbumAPIGetInfoParams {
-  albumUrl: string;
+interface GetInfoBase {
   albumImageFormat?: string | number | ImageFormat;
   artistImageFormat?: string | number | ImageFormat;
   includeRawData?: boolean;
 }
+
+interface GetInfoAlbumUrl extends GetInfoBase {
+  albumUrl: string;
+}
+
+interface GetInfoUrl extends GetInfoBase {
+  url: string;
+}
+
+type AlbumAPIGetInfoParams = GetInfoAlbumUrl | GetInfoUrl;
 
 export default class AlbumAPI extends BaseAPIWithImageSupport {
 
@@ -21,7 +30,7 @@ export default class AlbumAPI extends BaseAPIWithImageSupport {
       artistImageFormat: await this.imageAPI.getFormat(params.artistImageFormat, 21),
       includeRawData: params.includeRawData !== undefined ? params.includeRawData : false
     };
-    const html = await this.fetch(params.albumUrl);
+    const html = await this.fetch('albumUrl' in params ? params.albumUrl : params.url);
     return AlbumInfoParser.parseInfo(html, opts);
   }
 }

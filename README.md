@@ -2,14 +2,21 @@
 
 # bandcamp-fetch
 
-This fork removes Node dependencies to work with Cloudflare Pages. It might work in other environments that provide `fetch` as well.
+This fork removes Node dependencies to work with Cloudflare Pages. It might work in other environments that provide `fetch` as well!
 
 - `node-cache` has been replaced with a simple in-memory record store.
 - `URL` has been replaced with a barebones implementation.
-- `EOL` has been replaced with `\\n`. Development outside of Linux might not be supported!
+- `EOL` has been replaced with `\\n`.
+  * Development outside of Linux might not be supported!
 - `node-fetch` has been removed, falling back to the environment's native `fetch` functions.
 
-This fork will likely not be maintained outside of my own interest!
+Additionally, some quality-of-life changes have been made.
+- `description` field has been added to `Track`.
+- Both the above and `Album`'s `description` will use Linux newlines.
+- `url` option to replace `albumUrl` and `trackUrl`.
+  * The original fields will still take priority!
+
+This fork will likely not be maintained outside my own interest!
 
 ---
 

@@ -64,7 +64,8 @@ export default class TrackInfoParser {
       type: 'track',
       name: basic.name,
       description: basic.description.replaceAll('\r\n', '\n') || '',
-      url: basic['@id']
+      url: basic['@id'],
+      position: extra.current?.track_number
     };
 
     const imageUrl = reformatImageUrl(basic.image, opts.albumImageFormat);

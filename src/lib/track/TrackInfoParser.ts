@@ -96,6 +96,7 @@ export default class TrackInfoParser {
 
     const streamUrlHQ = extra.trackinfo?.[0]?.file?.['mp3-v0'];
     if (streamUrlHQ) {
+      track.streamUrl = streamUrlHQ;
       track.streamUrlHQ = streamUrlHQ;
     }
 

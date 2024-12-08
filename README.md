@@ -5,7 +5,7 @@
 This fork removes Node dependencies to work with Cloudflare Pages. It might work in other environments that provide `fetch` as well!
 
 - `node-cache` has been replaced with a simple in-memory record store.
-- `URL` has been replaced with a barebones implementation.
+- `URL` has been replaced with a bare-bones implementation.
 - `EOL` has been replaced with `\\n`.
   * Development outside of Linux might not be supported!
 - `node-fetch` has been removed, falling back to the environment's native `fetch` functions.
@@ -15,6 +15,8 @@ Additionally, some quality-of-life changes have been made.
 - Both the above and `Album`'s `description` will use Linux newlines.
 - `url` option to replace `albumUrl` and `trackUrl`.
   * The original fields will still take priority!
+- `slug` field on `Album` and `Track`.
+- `Track`'s `streamUrl` will be overridden by `streamUrlHQ` if available.
 
 This fork will likely not be maintained outside my own interest!
 

@@ -17,6 +17,7 @@ export interface AlbumRelease {
   name: string;
   format: string;
   url?: string;
+  slug?: string;
   imageUrl?: string;
   description?: string;
 }

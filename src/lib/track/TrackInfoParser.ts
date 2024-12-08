@@ -60,13 +60,20 @@ export default class TrackInfoParser {
       throw new ParseError('Failed to parse track info: invalid extra data');
     }
 
+    const url = basic['@id'];
+
     const track: Track = {
       type: 'track',
       name: basic.name,
       description: basic.description.replaceAll('\r\n', '\n') || '',
-      url: basic['@id'],
+      url,
       position: extra.current?.track_number
     };
+
+    if (url) {
+      const urlParts = url.split('/');
+      url.slug = urlParts[urlParts.length - 1];
+    }
 
     const imageUrl = reformatImageUrl(basic.image, opts.albumImageFormat);
     if (imageUrl) {

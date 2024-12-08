@@ -96,6 +96,9 @@ export default class AlbumInfoParser {
         const releaseUrl = normalizeUrl(release['@id'], album.url);
         if (releaseUrl) {
           releaseItem.url = releaseUrl;
+
+          const urlParts = releaseUrl.split('/');
+          releaseItem.slug = urlParts[urlParts.length - 1];
         }
         if (release.image) {
           if (Array.isArray(release.image) && release.image[0]) {

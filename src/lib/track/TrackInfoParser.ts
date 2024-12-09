@@ -72,7 +72,7 @@ export default class TrackInfoParser {
 
     if (url) {
       const urlParts = url.split('/');
-      url.slug = urlParts[urlParts.length - 1];
+      track.slug = urlParts[urlParts.length - 1];
     }
 
     const imageUrl = reformatImageUrl(basic.image, opts.albumImageFormat);

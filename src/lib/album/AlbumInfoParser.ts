@@ -51,10 +51,12 @@ export default class AlbumInfoParser {
       artist.url = basic.byArtist['@id'];
     }
 
+    const url = basic['@id'];
+
     const album: Album = {
       type: 'album',
       name: basic.name,
-      url: basic['@id'],
+      url,
       numTracks: basic.numTracks,
       keywords: basic.keywords,
       description: basic.description.replaceAll('\r\n', '\n') || '',
@@ -83,6 +85,11 @@ export default class AlbumInfoParser {
       artist.url = publisher.url;
     }
 
+    if (url) {
+      const urlParts = url.split('/');
+      album.slug = urlParts[urlParts.length - 1];
+    }
+
     if (Array.isArray(basic.albumRelease)) {
       const releases = basic.albumRelease.filter(
         (release: any) => release.musicReleaseFormat).map((release: any) => {
@@ -96,9 +103,6 @@ export default class AlbumInfoParser {
         const releaseUrl = normalizeUrl(release['@id'], album.url);
         if (releaseUrl) {
           releaseItem.url = releaseUrl;
-
-          const urlParts = releaseUrl.split('/');
-          releaseItem.slug = urlParts[urlParts.length - 1];
         }
         if (release.image) {
           if (Array.isArray(release.image) && release.image[0]) {

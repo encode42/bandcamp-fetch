@@ -6,6 +6,7 @@ interface Album extends MediaKind {
   numTracks?: number;
   keywords?: string[];
   description?: string;
+  slug?: string;
   genre?: string;
   location?: string;
   featuredTrack?: Omit<Track, 'type'>;
@@ -17,7 +18,6 @@ export interface AlbumRelease {
   name: string;
   format: string;
   url?: string;
-  slug?: string;
   imageUrl?: string;
   description?: string;
 }

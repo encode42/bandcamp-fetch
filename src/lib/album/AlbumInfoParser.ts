@@ -146,6 +146,9 @@ export default class AlbumInfoParser {
         const trackUrl = normalizeUrl(track.title_link, album.url);
         if (trackUrl) {
           trackItem.url = trackUrl;
+
+          const trackUrlParts = trackUrl.split('/');
+          trackItem.slug = trackUrlParts[trackUrlParts.length - 1];
         }
         else if (trackItem.position !== undefined) {
           const trackFromBasic = tracksFromBasicInfo.find((el: any) => el?.position === trackItem.position);

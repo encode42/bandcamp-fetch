@@ -135,8 +135,11 @@ export default class DiscographyParser {
     const results = [];
     for (const [ url, props ] of Object.entries(items)) {
       if (props.type && props.name) {
+        const urlParts = url.split('/');
+
         const item: Album | Track = {
           url,
+          slug: urlParts[urlParts.length - 1],
           type: props.type,
           name: props.name,
           artist: props.artist || {

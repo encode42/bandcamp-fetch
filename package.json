@@ -1,6 +1,6 @@
 {
   "name": "@encode42/bandcamp-fetch",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "description": "Scrape Bandcamp content (supports Cloudflare Pages)",
   "scripts": {
     "build": "npm run prepare",
